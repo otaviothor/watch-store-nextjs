@@ -1,5 +1,5 @@
-import ProductCard from "@/components/product-card";
-import Search from "@/components/search";
+import ProductCard from "../components/product-card";
+import Search from "../components/search";
 
 export default function Home() {
   return (
