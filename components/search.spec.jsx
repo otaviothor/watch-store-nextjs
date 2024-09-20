@@ -26,6 +26,7 @@ describe("Search component", () => {
     await fireEvent.submit(form);
 
     expect(doSearch).toHaveBeenCalledTimes(1);
+    expect(doSearch).toHaveBeenCalledWith(inputText);
     expect(input).toHaveValue(inputText);
   });
 });
