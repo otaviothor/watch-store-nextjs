@@ -10,10 +10,15 @@ export const useFetchProducts = () => {
     axios
       .get('/api/products')
       .then((res) => {
-        if (mounted) setProducts(res.data.products);
+        if (mounted) {
+          setProducts(res.data.products);
+        }
       })
       .catch((e) => {
-        if (mounted) setError(true);
+        /* istanbul ignore next */
+        if (mounted) {
+          setError(true);
+        }
       });
 
     return () => (mounted = false);

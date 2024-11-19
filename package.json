@@ -25,13 +25,13 @@
     "zustand": "3.6.9"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@testing-library/dom": "8.11.2",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
-    "@testing-library/react-hooks": "7.0.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/user-event": "13.5.0",
     "babel-jest": "27.4.6",
-    "@faker-js/faker": "^8.4.1",
     "jest": "27.4.7",
     "jest-dom": "^4.0.0",
     "jest-watch-typeahead": "1.0.0",
@@ -39,6 +39,6 @@
     "postcss": "^8.4.5",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "^7.2.3",
-    "react-test-renderer": "17.0.2"
+    "react-test-renderer": "^17.0.2"
   }
 }
