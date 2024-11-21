@@ -1,6 +1,10 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 
-import Cart from "../components/cart";
+import Cart from '../components/cart';
+
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  require('../miragejs/server').makeServer();
+}
 
 export default function MyApp({ Component, pageProps }) {
   return (

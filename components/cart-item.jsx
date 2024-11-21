@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function CartItem({ product }) {
   const [quantity, setQuantity] = useState(1);
