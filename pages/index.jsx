@@ -1,16 +1,19 @@
+import { useEffect, useState } from 'react';
 import ProductCard from '../components/product-card';
 import Search from '../components/search';
 import { useFetchProducts } from '../hooks/use-fetch-products';
 
 export default function Home() {
   const { products, error } = useFetchProducts();
+  const [term, setTerm] = useState('');
+  const [localProducts, setLocalProducts] = useState([]);
 
   const renderProductListOrMessage = () => {
-    if (products.length === 0 && !error) {
+    if (localProducts.length === 0 && !error) {
       return <h4 data-testid="no-products">No products</h4>;
     }
 
-    return products.map((product) => (
+    return localProducts.map((product) => (
       <ProductCard product={product} key={product.id} />
     ));
   };
@@ -23,11 +26,22 @@ export default function Home() {
     return <h4 data-testid="server-error">Server is down</h4>;
   };
 
-  const doSearch = () => {};
+  useEffect(() => {
+    if (term === '') {
+      setLocalProducts(products);
+    } else {
+      setLocalProducts(
+        products.filter(
+          (product) =>
+            product.title.toLowerCase().indexOf(term.toLocaleLowerCase()) > -1,
+        ),
+      );
+    }
+  }, [products, term]);
 
   return (
     <main data-testid="product-list" className="my-8">
-      <Search doSearch={doSearch} />
+      <Search doSearch={(newTerm) => setTerm(newTerm)} />
       <div className="container mx-auto px-6">
         <h3 className="text-gray-700 text-2xl font-medium">Wrist Watch</h3>
         <span className="mt-3 text-sm text-gray-500">200+ Products</span>

@@ -56,7 +56,7 @@ describe('ProductList', () => {
     });
   });
 
-  fit('should filter the product list when a search is performed', async () => {
+  it('should filter the product list when a search is performed', async () => {
     const searchTerm = 'Relógio Bonito';
     server.createList('product', 2);
     server.create('product', {
