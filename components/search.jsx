@@ -8,6 +8,14 @@ export default function Search({ doSearch }) {
     doSearch(term);
   };
 
+  const inputHandler = (e) => {
+    setTerm(e.target.value);
+
+    if (e.target.value === '') {
+      doSearch('');
+    }
+  };
+
   return (
     <form
       name="search=form"
@@ -31,7 +39,7 @@ export default function Search({ doSearch }) {
         type="search"
         placeholder="Search"
         value={term}
-        onChange={(e) => setTerm(e.target.value)}
+        onInput={inputHandler}
       />
     </form>
   );
