@@ -19,6 +19,7 @@ export const useCartStore = create((set) => ({
     toggle: () =>
       set((store) => ({
         state: {
+          ...store.state,
           open: !store.state.open,
         },
       })),
