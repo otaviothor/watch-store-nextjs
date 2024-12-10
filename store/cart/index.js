@@ -1,22 +1,31 @@
 import create from 'zustand';
 
+const initialState = {
+  open: false,
+  products: [],
+};
+
 export const useCartStore = create((set) => ({
   state: {
-    open: false,
-    products: [],
+    ...initialState,
   },
   actions: {
+    reset: () =>
+      set((store) => ({
+        state: {
+          ...initialState,
+        },
+      })),
     toggle: () =>
       set((store) => ({
         state: {
-          ...store.state,
           open: !store.state.open,
         },
       })),
     add: (product) =>
       set((store) => ({
         state: {
-          ...store.state,
+          open: true,
           products: [...store.state.products, product],
         },
       })),
