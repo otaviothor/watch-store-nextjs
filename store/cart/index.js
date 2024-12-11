@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import create from 'zustand';
 
 const initialState = {
@@ -5,38 +6,30 @@ const initialState = {
   products: [],
 };
 
-const addProduct = (store, product) => {
-  if (store.state.products.includes(product)) {
-    return store.state.products;
-  }
+export const useCartStore = create((set) => {
+  const setState = (fn) => set(produce(fn));
 
-  return [...store.state.products, product];
-};
+  return {
+    state: {
+      ...initialState,
+    },
+    actions: {
+      reset() {
+        setState((store) => {
+          store.state = initialState;
+        });
+      },
+      toggle() {
+        setState(({ state }) => {
+          state.open = !state.open;
+        });
+      },
 
-export const useCartStore = create((set) => ({
-  state: {
-    ...initialState,
-  },
-  actions: {
-    reset: () =>
-      set((store) => ({
-        state: {
-          ...initialState,
-        },
-      })),
-    toggle: () =>
-      set((store) => ({
-        state: {
-          ...store.state,
-          open: !store.state.open,
-        },
-      })),
-    add: (product) =>
-      set((store) => ({
-        state: {
-          open: true,
-          products: addProduct(store, product),
-        },
-      })),
-  },
-}));
+      add(product) {
+        setState(({ state }) => {
+          if (!state.products.includes(product)) state.products.push(product);
+        });
+      },
+    },
+  };
+});
