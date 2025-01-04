@@ -7,10 +7,13 @@ module.exports = {
   },
   collectCoverageFrom: [
     '<rootDir>/components/**/*.jsx',
+    '<rootDir>/components/**/*.js',
     '<rootDir>/pages/**/*.jsx',
+    '<rootDir>/pages/**/*.js',
     '<rootDir>/hooks/**/*.jsx',
     '<rootDir>/hooks/**/*.js',
     '<rootDir>/store/**/*.jsx',
+    '<rootDir>/store/**/*.js',
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',

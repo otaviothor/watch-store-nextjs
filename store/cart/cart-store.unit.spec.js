@@ -33,7 +33,7 @@ describe('Cart Store', () => {
     expect(Array.isArray(result.current.state.products)).toBe(true);
   });
 
-  it('should add 2 products to the list', async () => {
+  it('should add 2 products to the list and open the cart', async () => {
     const products = server.createList('product', 2);
 
     for (const product of products) {
@@ -41,6 +41,7 @@ describe('Cart Store', () => {
     }
 
     expect(result.current.state.products).toHaveLength(2);
+    expect(result.current.state.open).toBeTruthy();
   });
 
   it('should not add same product twice', async () => {
@@ -64,7 +65,7 @@ describe('Cart Store', () => {
     expect(result.current.state.products).toHaveLength(0);
   });
 
-  it('should remover a product from the store', () => {
+  it('should remove a product from the store', () => {
     const [product1, product2] = server.createList('product', 2);
 
     act(() => {
@@ -75,11 +76,11 @@ describe('Cart Store', () => {
     expect(result.current.state.products).toHaveLength(2);
 
     act(() => {
-      remove(product1);
+      remove(product2);
     });
 
     expect(result.current.state.products).toHaveLength(1);
-    expect(result.current.state.products[0]).toEqual(product2);
+    expect(result.current.state.products[0]).toEqual(product1);
   });
 
   it('should clear cart', () => {
