@@ -1,26 +1,11 @@
-import CartItem from './cart-item';
 import { useCartStore } from '../store/cart';
-import { useEffect } from 'react';
+import CartItem from './cart-item';
 
 export default function Cart() {
   const { open, products } = useCartStore((store) => store.state);
   const { toggle, removeAll } = useCartStore((store) => store.actions);
 
   const hasProducts = products.length > 0;
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape' && open === true) {
-        toggle();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
 
   return (
     <div
