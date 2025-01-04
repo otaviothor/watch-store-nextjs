@@ -1,9 +1,12 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import { makeServer } from '../miragejs/server';
 import { useCartStore } from '../store/cart';
+import { setAutoFreeze } from 'immer';
 import { render, screen } from '@testing-library/react';
 import Cart from './cart';
 import userEvent from '@testing-library/user-event';
+
+setAutoFreeze(false);
 
 describe('Cart', () => {
   let server;

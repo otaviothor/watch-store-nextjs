@@ -20,7 +20,7 @@ export default function CartItem({ product }) {
           <div className="flex items-center mt-2">
             <button
               className="text-gray-500 focus:outline-none focus:text-gray-600"
-              onClick={decrease}
+              onClick={increase}
             >
               <svg
                 className="h-5 w-5"
@@ -39,7 +39,7 @@ export default function CartItem({ product }) {
             </span>
             <button
               className="text-gray-500 focus:outline-none focus:text-gray-600"
-              onClick={increase}
+              onClick={decrease}
             >
               <svg
                 className="h-5 w-5"
