@@ -25,6 +25,7 @@ export default function CartItem({ product }) {
             <button
               className="text-gray-500 focus:outline-none focus:text-gray-600"
               onClick={increase}
+              data-testid="increase"
             >
               <svg
                 className="h-5 w-5"
@@ -44,6 +45,7 @@ export default function CartItem({ product }) {
             <button
               className="text-gray-500 focus:outline-none focus:text-gray-600"
               onClick={decrease}
+              data-testid="decrease"
             >
               <svg
                 className="h-5 w-5"

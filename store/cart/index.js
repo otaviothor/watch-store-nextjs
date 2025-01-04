@@ -22,7 +22,7 @@ export const useCartStore = create((set) => {
 
       add(product) {
         setState(({ state }) => {
-          if (!state.products.map((p) => p.id).includes(product.id)) {
+          if (!state.products.find(({ id }) => id === product.id)) {
             state.products.push(product);
             state.open = true;
           }

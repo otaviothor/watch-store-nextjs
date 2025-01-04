@@ -40,17 +40,18 @@ describe('CartItem component', () => {
   it('should increase quantity by 1 when second button is clicked', async () => {
     renderCartItem();
 
-    const [_, button] = screen.getAllByRole('button');
+    const button = screen.getByTestId('increase');
 
     await fireEvent.click(button);
 
-    expect(screen.getByTestId('quantity').textContent).toBe('0');
+    expect(screen.getByTestId('quantity').textContent).toBe('2');
   });
 
   it('should decrease quantity by 1 when second button is clicked', async () => {
     renderCartItem();
 
-    const [buttonIncrease, buttonDecrease] = screen.getAllByRole('button');
+    const buttonIncrease = screen.getByTestId('increase');
+    const buttonDecrease = screen.getByTestId('decrease');
     const quantity = screen.getByTestId('quantity');
 
     await fireEvent.click(buttonIncrease);
@@ -63,7 +64,7 @@ describe('CartItem component', () => {
   it('should not go below zero in the quantity', async () => {
     renderCartItem();
 
-    const [_, buttonDecrease] = screen.getAllByRole('button');
+    const buttonDecrease = screen.getByTestId('decrease');
     const quantity = screen.getByTestId('quantity');
 
     expect(quantity.textContent).toBe('1');
