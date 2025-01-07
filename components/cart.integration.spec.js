@@ -1,4 +1,4 @@
-import { act as hookAct, renderHook } from '@testing-library/react-hooks';
+import { act as hooksAct, renderHook } from '@testing-library/react-hooks';
 import { makeServer } from '../miragejs/server';
 import { useCartStore } from '../store/cart';
 import { setAutoFreeze } from 'immer';
@@ -65,7 +65,7 @@ describe('Cart', () => {
   it('should display 2 products cards', async () => {
     const products = server.createList('product', 2);
 
-    hookAct(() => {
+    hooksAct(() => {
       for (const product of products) {
         add(product);
       }
@@ -74,5 +74,34 @@ describe('Cart', () => {
     render(<Cart />);
 
     expect(screen.getAllByTestId('cart-item')).toHaveLength(2);
+  });
+
+  it('should remove all products when clear cart button is clicked', async () => {
+    const products = server.createList(`product`, 2);
+    hooksAct(() => {
+      for (const product of products) {
+        add(product);
+      }
+    });
+
+    await componentsAct(async () => {
+      render(<Cart />);
+
+      expect(screen.getAllByTestId(`cart-item`)).toHaveLength(2);
+
+      await userEvent.click(
+        screen.getByRole(`button`, { name: /clear cart/i }),
+      );
+
+      expect(screen.queryAllByTestId(`cart-item`)).toHaveLength(0);
+    });
+  });
+
+  it('should not display clear cart button if no products are in the cart', async () => {
+    render(<Cart />);
+
+    expect(
+      screen.queryByRole(`button`, { name: /clear cart/i }),
+    ).not.toBeInTheDocument();
   });
 });
